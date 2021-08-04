@@ -24,12 +24,14 @@ const ListScreen = ({ navigation }) => {
 
   return (
     <View>
-      <TextInput
-        placeholder="Search"
-        style={styles.inputFirst}
-        onChangeText={handleSearch}
-        defaultValue={searchTerm}
-      />
+      <View style={styles.searchContainer}>
+        <TextInput
+          placeholder="Search"
+          style={styles.inputFirst}
+          onChangeText={handleSearch}
+          defaultValue={searchTerm}
+        />
+      </View>
       <FlatList
         keyExtractor={(album) => album.id.attributes["im:id"]}
         data={albuns}

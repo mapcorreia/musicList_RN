@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, Button, Image, Touchable } from "react-native";
+import { Text, View, Image, TouchableOpacity, Linking } from "react-native";
 import styles from "./DetailsView.styles";
 import { useSelector } from "react-redux";
 
@@ -8,17 +8,48 @@ const DetailView = () => {
 
   return (
     <View style={styles.container}>
-      <Image
-        style={styles.image}
-        source={{
-          uri: selectedAlbum["im:image"][2].label,
-          cache: "force-cache",
-        }}
-      />
       <View>
-        <Text></Text>
-        <Text style={styles.textStyle}>{selectedAlbum["im:name"].label}</Text>
-        <Button style={styles.albumLinkButton} title={"Link to Album"} />
+        <Image
+          style={styles.image}
+          source={{
+            uri: selectedAlbum["im:image"][2].label,
+            cache: "force-cache",
+          }}
+        />
+      </View>
+      <View style={styles.albumInformationContainer}>
+        <View style={styles.albumInformation}>
+          <Text style={styles.albumNameLabel}>
+            {selectedAlbum["im:name"].label}
+          </Text>
+          <Text style={styles.artistNameLabel}>
+            {selectedAlbum["im:artist"].label}
+          </Text>
+        </View>
+        <View style={styles.albumInformationDetails}>
+          <Text style={styles.informationDetailItem}>
+            Category: {selectedAlbum.category.attributes.term}
+          </Text>
+          <Text style={styles.informationDetailItem}>
+            Release Date: {selectedAlbum["im:releaseDate"].attributes.label}
+          </Text>
+          <Text style={styles.informationDetailItem}>
+            nº of tracks: {selectedAlbum["im:itemCount"].label}
+          </Text>
+          <Text style={styles.informationDetailItem}>
+            {selectedAlbum["im:price"].label}
+          </Text>
+        </View>
+        <View style={styles.albumInformation}>
+          <TouchableOpacity
+            style={styles.albumLinkButton}
+            onPress={() => {
+              Linking.openURL(selectedAlbum.link.attributes.href);
+            }}
+          >
+            <Text style={styles.albumLinkText}>Link to Album</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
