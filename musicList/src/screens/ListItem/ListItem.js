@@ -1,9 +1,9 @@
 import React from "react";
-import { View, Button, Text, Image, Icon } from "react-native";
-import { Chevron } from "../../../assets/Icons/Chevron/Chevron";
+import { View, TouchableOpacity, Text, Image } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import styles from "./ListItem.styles";
+import Icon from "react-native-vector-icons/FontAwesome5";
 import { selectAlbum } from "../../../store/actions";
+import styles from "./ListItem.styles";
 
 const ListItem = ({ item, navigation }) => {
   const selectedAlbum = useSelector((state) => state.selectedAlbum);
@@ -34,7 +34,9 @@ const ListItem = ({ item, navigation }) => {
         <Text style={styles.priceLabel}>{item["im:price"].label}</Text>
       </View>
       <View style={styles.arrow}>
-        {<Button title={">"} onPress={handleItemPress} />}
+        <TouchableOpacity onPress={handleItemPress}>
+          <Icon name="chevron-right" size={20} color="#000" />
+        </TouchableOpacity>
       </View>
     </View>
   );

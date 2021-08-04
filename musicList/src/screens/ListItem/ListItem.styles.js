@@ -29,7 +29,8 @@ const styles = StyleSheet.create({
   },
   arrow: {
     flex: 1,
-    backgroundColor: "darkgrey",
+    backgroundColor: "#dedfe0",
+    justifyContent: "center",
   },
 });
 
