@@ -42,11 +42,20 @@ const styles = StyleSheet.create({
     padding: 15,
     marginBottom: 20,
     borderRadius: 6,
-    backgroundColor: "#38393b",
+    backgroundColor: "#202020",
   },
   albumLinkText: {
     color: "white",
     fontSize: 18,
+  },
+
+  spotifyProfileLinkButton: {
+    alignItems: "center",
+    width: 150,
+    padding: 15,
+    marginBottom: 20,
+    borderRadius: 6,
+    backgroundColor: "#1DB954",
   },
 });
 

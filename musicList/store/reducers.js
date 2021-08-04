@@ -3,6 +3,7 @@ import {
   FETCH_ALBUNS_SUCCESS,
   FETCH_ALBUNS_IN_PROGRESS,
   SELECT_ALBUM,
+  GET_SPOTIFY_PROFILE,
 } from "../store/actions";
 
 export const albunsListReducer = (albuns = [], action) => {
@@ -34,8 +35,17 @@ export const isLoadingReducer = (isloading = false, action) => {
   return isloading;
 };
 
+export const spotifyProfileReducer = (spotifyProfile = null, action) => {
+  if (action.type === GET_SPOTIFY_PROFILE) {
+    return action.payload;
+  }
+
+  return spotifyProfile;
+};
+
 export default combineReducers({
   albuns: albunsListReducer,
   selectedAlbum: selectedAlbumReducer,
   isLoading: isLoadingReducer,
+  spotifyProfile: spotifyProfileReducer,
 });

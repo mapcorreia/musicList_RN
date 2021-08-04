@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Text, View, Image, TouchableOpacity, Linking } from "react-native";
 import styles from "./DetailsView.styles";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getSpotifyProfile } from "../../../store/actions";
 
 const DetailView = () => {
   const selectedAlbum = useSelector((state) => state.selectedAlbum);
+  const spotifyProfile = useSelector((state) => state.spotifyProfile);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getSpotifyProfile(selectedAlbum["im:artist"].label));
+  }, [dispatch]);
 
   return (
     <View style={styles.container}>
@@ -44,11 +52,21 @@ const DetailView = () => {
           <TouchableOpacity
             style={styles.albumLinkButton}
             onPress={() => {
-              Linking.openURL(selectedAlbum.link.attributes.href);
+              Linking.openURL(selectedAlbum?.link.attributes.href);
             }}
           >
             <Text style={styles.albumLinkText}>Link to Album</Text>
           </TouchableOpacity>
+          {!!spotifyProfile && (
+            <TouchableOpacity
+              style={styles.spotifyProfileLinkButton}
+              onPress={() => {
+                Linking.openURL(spotifyProfile?.external_urls.spotify);
+              }}
+            >
+              <Text style={styles.albumLinkText}>Spotify Profile</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     </View>
